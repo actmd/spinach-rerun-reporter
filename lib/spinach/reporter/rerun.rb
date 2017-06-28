@@ -18,7 +18,7 @@ module Spinach
         super success
 
         # append rerun scenarios to rerun_file
-        File.open(rerun_file, 'a') { |f| f.write @rerun.join("\n") } unless success
+        File.open(rerun_file, 'a') { |f| f.write @rerun.join("\n") + "\n" } unless success
       end
 
       def on_failed_step(step, failure, step_location, step_definitions = nil)
