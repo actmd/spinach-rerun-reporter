@@ -5,7 +5,7 @@ module Spinach
         super(*args)
 
         # reset rerun.txt file
-        File.delete(rerun_file) if File.file?(rerun_file)
+        # File.delete(rerun_file) if File.file?(rerun_file)
 
         # create tmp folder if not exists
         Dir.mkdir('tmp', 0755) unless Dir.exist?('tmp')
@@ -17,8 +17,8 @@ module Spinach
       def after_run(success)
         super success
 
-        # save rerun scenarios in a file
-        File.open(rerun_file, 'w') { |f| f.write @rerun.join("\n") } unless success
+        # append rerun scenarios to rerun_file
+        File.open(rerun_file, 'a') { |f| f.write @rerun.join("\n") } unless success
       end
 
       def on_failed_step(step, failure, step_location, step_definitions = nil)
